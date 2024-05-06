@@ -1,0 +1,10 @@
+<launch>
+    <arg name="spec_name" value="demo_gr1.spc"/>
+    <arg name="venv" value="/home/$(env USER)/miniconda3/envs/gr1ros/bin/python" />
+
+    <node name="sensors" pkg="gr1strategy" type="sensorsHandler.py" />
+    <node name="actuators" pkg="gr1strategy" type="actuatorsHandler.py" />
+
+    <node name="strategy" pkg="gr1strategy" type="strategyExecutor.py" args="-s $(find gr1strategy)/specs/$(arg spec_name)" />
+
+</launch>

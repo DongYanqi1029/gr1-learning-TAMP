@@ -1,0 +1,4 @@
+<launch>
+    <node pkg="myvehicle_navigation" type="drl_local_planner.py" name="local_planner" output="screen">
+    </node>
+</launch>

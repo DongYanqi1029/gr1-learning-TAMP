@@ -1,0 +1,30 @@
+<launch>
+
+    <!--Args for map file location-->
+    <arg name="slam_methods" default="gmapping" />
+    <arg name="model" default="$(env TURTLEBOT3_MODEL)" />
+
+    <!--SLAM launch-->
+    <include file="$(find myvehicle_slam)/launch/myvehicle_slam.launch">
+      <arg name="slam_methods" value="$(arg slam_methods)" />
+      <arg name="model" value="$(arg model)" />
+    </include>
+
+    <!-- move_base -->
+    <include file="$(find turtlebot3_navigation)/launch/move_base.launch">
+        <arg name="model" value="$(arg model)" />
+        <arg name="move_forward_only" value="false"/>
+    </include>
+
+    <!--Auto explore using 'explore_lite' package-->
+    <include file="$(find myvehicle_slam)/launch/explore.launch">
+    </include>
+
+    <!--Auto explore using 'rrt_exploration' package-->
+    <!-- <include file="$(find slam)/launch/explore.launch">
+    </include> -->
+
+    <!-- Semantic map tagging -->
+    <node name="semantic_mapping" pkg="semantic_map" type="semantic_mapping.py"/>
+
+</launch>

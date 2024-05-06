@@ -1,0 +1,12 @@
+<launch>
+    <arg name="map_name" default="demo_world" />
+    <arg name="map_pack" default="myvehicle_slam" />
+    <arg name="filename" default="$(eval find(map_pack) + '/map/' + map_name)" />
+
+    <!-- Save grid map -->
+    <node name="map_saver" pkg="map_server" type="map_saver" args="-f $(arg filename)" />
+
+    <!-- Save semantic map -->
+    <node name="semantic_map_saver" pkg="semantic_map" type="semantic_saver.py" args="-f $(arg filename)" />
+
+</launch>
