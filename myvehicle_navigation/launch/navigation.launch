@@ -35,6 +35,9 @@
     <!-- Navigation using simple drl planner-->
     <!-- <node pkg="myvehicle_navigation" type="drl_planner.py" name="drl_planner" output="screen"/> -->
 
+    <!--Yolo detector-->
+    <node name="yolo_detector" pkg="vision_detector" type="detector.py"/>
+
 
 
 </launch>

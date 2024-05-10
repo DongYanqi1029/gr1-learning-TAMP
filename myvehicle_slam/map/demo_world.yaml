@@ -1,4 +1,4 @@
-image: /home/dongyanqi/catkin_ws/src/myvehicle_slam/map/demo_world.pgm
+image: /home/dyq/catkin_ws/src/myvehicle_slam/map/demo_world.pgm
 resolution: 0.050000
 origin: [-10.000000, -10.000000, 0.000000]
 negate: 0

@@ -57,7 +57,7 @@ class drl_local_planner():
 
         # check if global plan exists
         if self.current_goal < 0:
-            rospy.logwarn("Please set goal!")
+            # rospy.logwarn("Please set goal!")
 
             reach = Bool()
             reach.data = True
@@ -125,7 +125,7 @@ class drl_local_planner():
 
 
 if __name__ == "__main__":
-    model_path = "/home/dongyanqi/catkin_ws/src/myvehicle_navigation/models"
+    model_path = "/home/dyq/catkin_ws/src/myvehicle_navigation/models"
     model_name = "lidar_td3_nav.pt"
 
     planner = drl_local_planner(model_name, model_path)

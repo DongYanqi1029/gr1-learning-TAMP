@@ -2,6 +2,10 @@ name: gr1ros
 channels:
   - pytorch
   - conda-forge
+  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/
+  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
+  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge/
+  - https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/pytorch/
   - defaults
 dependencies:
   - _libgcc_mutex=0.1=conda_forge
@@ -60,7 +64,6 @@ dependencies:
   - openh264=2.1.1=h4ff587b_0
   - openjpeg=2.4.0=h3ad879b_0
   - openssl=3.2.1=hd590300_1
-  - pillow=10.2.0=py310h5eee18b_0
   - pip=23.3.1=py310h06a4308_0
   - pysocks=1.7.1=py310h06a4308_0
   - python=3.10.14=h955ad1f_0
@@ -77,28 +80,59 @@ dependencies:
   - torchaudio=2.2.2=py310_cpu
   - torchvision=0.17.2=py310_cpu
   - typing_extensions=4.9.0=py310h06a4308_1
-  - tzdata=2024a=h04d1e81_0
   - urllib3=2.1.0=py310h06a4308_1
   - wheel=0.41.2=py310h06a4308_0
   - xz=5.4.6=h5eee18b_0
   - yaml=0.2.5=h7b6447c_0
   - zlib=1.2.13=h5eee18b_0
-  - zstd=1.5.5=hc292b87_0
   - pip:
+      - astutils==0.0.6
       - catkin-pkg==1.0.0
+      - contourpy==1.2.1
+      - cvxopt==1.3.2
+      - cycler==0.12.1
+      - dd==0.5.7
       - defusedxml==0.7.1
       - distro==1.9.0
       - docutils==0.21.2
+      - fonttools==4.51.0
+      - fsspec==2024.3.1
+      - gitdb==4.0.11
+      - gitpython==3.1.43
+      - humanize==4.9.0
+      - kiwisolver==1.4.5
+      - matplotlib==3.8.4
+      - natsort==8.4.0
+      - omega==0.3.1
+      - opencv-python==4.9.0.80
+      - packaging==24.0
+      - pandas==2.2.2
+      - pillow==10.3.0
+      - ply==3.10
+      - polytope==0.2.5
+      - psutil==5.9.8
+      - py-cpuinfo==9.0.0
       - pydot==2.0.0
       - pyparsing==3.1.2
       - python-dateutil==2.9.0.post0
+      - python-graphviz==0.20.3
+      - pytz==2024.1
       - rosdep==0.23.0
       - rosdistro==0.9.0
       - rosinstall==0.7.8
       - rosinstall-generator==0.1.23
       - rospkg==1.5.1
+      - scipy==1.13.0
+      - seaborn==0.13.2
       - six==1.16.0
+      - smmap==5.0.1
+      - thop==0.1.1-2209072238
+      - tqdm==4.66.4
       - tulip==1.4.0
+      - tzdata==2024.1
+      - ultralytics==8.2.11
       - vcstools==0.1.40
       - wstool==0.1.17
-prefix: /home/dongyanqi/miniconda3/envs/gr1ros
+      - zstandard==0.22.0
+      - zstd==1.5.5.1
+prefix: /home/dyq/miniconda3/envs/gr1ros
