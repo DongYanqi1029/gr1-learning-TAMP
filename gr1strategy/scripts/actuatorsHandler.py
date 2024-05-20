@@ -26,7 +26,7 @@ def handle_set_actuators(req):
 
                 if not reach:
                     res = False
-                    rospy.logerr("Navigation to region {} execution failed!".format(region_name))
+                    rospy.loginfo("Navigating to region {} ...".format(region_name))
                 else:
                     rospy.loginfo("Navigation to region {} execution Completed!".format(region_name))
             else:
@@ -40,8 +40,17 @@ def handle_set_actuators(req):
             # if not feedback:
             #     res = False
             #     rospy.logerr("Actuator {} execution failed!".format(name))
-            pass
+            if value:
+                actuator = importlib.import_module('.{}'.format(name), package='gr1strategy.actuators')
+                feedback = actuator.setAction(value)
 
+                if not feedback:
+                    res = False
+                    rospy.loginfo("Executing action {} ...".format(name))
+                else:
+                    rospy.loginfo("Execution of action {} completed!".format(name))
+            else:
+                pass
 
     resp = SetActuatorsResponse(bool(res))
 

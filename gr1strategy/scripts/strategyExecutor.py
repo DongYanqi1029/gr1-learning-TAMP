@@ -80,8 +80,7 @@ class StrategyExecutor():
             self.states_seq.append(self.current_state)
             self.output_seq.append(output_props)
         else:
-            rospy.logerr("Transition failed due to actuator failure")
-            sys.exit(-1)
+            rospy.loginfo("Transition not completed: state remains in {}".format(str(self.current_state)))
 
     def run(self):
 

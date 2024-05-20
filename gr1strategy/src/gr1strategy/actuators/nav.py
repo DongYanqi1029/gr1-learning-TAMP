@@ -27,13 +27,17 @@ def navToGoal(goal_marker:Marker) -> bool:
 
     goal_pub.publish(msg)
     rospy.loginfo("Successful goal pub")
-    
 
+    # nav step interval
+    interval = 0.2
+    
     # Check for reach status
     reach = False
-    while not reach:
-        msg = rospy.wait_for_message('/nav/reach', Bool, timeout=3)
+    try:
+        msg = rospy.wait_for_message('/nav/reach', Bool, timeout=interval)
         reach = msg.data
+    except:
+        pass
 
     return reach
 

@@ -76,6 +76,14 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
+        camera_depth_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+        camera_depth_optical_frame:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
         camera_link:
           Alpha: 1
           Show Axes: false
@@ -232,7 +240,7 @@ Visualization Manager:
       Value: true
     - Class: rviz/Image
       Enabled: true
-      Image Topic: /yolo_detector/detections
+      Image Topic: /yolo_detector/annotations
       Max Value: 1
       Median window: 5
       Min Value: 0
