@@ -14,7 +14,7 @@ def handle_set_actuators(req):
     res = True
 
     for name, value in props_values.items():
-        # rospy.loginfo("Virtual Execution of action: {}".format(name))
+        rospy.loginfo("Executing action proposition: {}...".format(name))
 
         # Navigation module for path and motion planning
         if name.startswith('goto_'):
@@ -41,14 +41,18 @@ def handle_set_actuators(req):
             #     res = False
             #     rospy.logerr("Actuator {} execution failed!".format(name))
             if value:
-                actuator = importlib.import_module('.{}'.format(name), package='gr1strategy.actuators')
-                feedback = actuator.setAction(value)
+                try:
+                    actuator = importlib.import_module('.{}'.format(name), package='gr1strategy.actuators')
+                    feedback = actuator.setAction(value)
 
-                if not feedback:
-                    res = False
-                    rospy.loginfo("Executing action {} ...".format(name))
-                else:
-                    rospy.loginfo("Execution of action {} completed!".format(name))
+                    if not feedback:
+                        res = False
+                        rospy.loginfo("Executing action {} ...".format(name))
+                    else:
+                        rospy.loginfo("Execution of action {} completed!".format(name))
+                except e:
+                    # do nothing
+                    rospy.logerr("Actuator '{}' not implemented!".format(name))
             else:
                 pass
 

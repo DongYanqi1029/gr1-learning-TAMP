@@ -69,15 +69,15 @@ def load_GRSpec(filename:str) -> spec.GRSpec:
 
 if __name__ == "__main__":
 
-    specs = load_GRSpec("/home/dongyanqi/catkin_ws/src/gr1strategy/specs/demo_gr1.spc")
+    specs = load_GRSpec("/home/dyq/catkin_ws/src/gr1strategy/specs/demo_gr1.spc")
     specs.qinit = r'\E \A'
 
     # Mealy
     ctrl = synth.synthesize(specs)
     print(ctrl)
-    print(ctrl.inputs)
-    print(ctrl.outputs)
-    next_state, output_props = ctrl.reaction('Sinit', {})
-    print(next_state, output_props)
+    # print(ctrl.inputs)
+    # print(ctrl.outputs)
+    # next_state, output_props = ctrl.reaction('Sinit', {})
+    # print(next_state, output_props)
 
     

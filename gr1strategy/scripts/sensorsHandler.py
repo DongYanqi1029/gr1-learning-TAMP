@@ -11,6 +11,7 @@ def handle_get_sensors(req):
     sensors_values = defaultdict(bool)
 
     for name in props:
+        rospy.loginfo("Processing sensor proposition: {}...".format(name))
 
         # Vision detection module for object detection
         if name.startswith('see_'):
@@ -20,7 +21,7 @@ def handle_get_sensors(req):
             yolo = importlib.import_module('.yolo', package='gr1strategy.sensors')
             objects = yolo.detect()
 
-            if object_name in set(objects):
+            if object_name in objects:
                 sensors_values[name] = True
                 rospy.loginfo("{} detected!".format(object_name))
             else:
@@ -28,10 +29,14 @@ def handle_get_sensors(req):
                 rospy.loginfo("{} not detected!".format(object_name))
         
         else:
-            sensor = importlib.import_module('.{}'.format(name), package='gr1strategy.sensors')
-            value = sensor.getSensor()
+            try:
+                sensor = importlib.import_module('.{}'.format(name), package='gr1strategy.sensors')
+                value = sensor.getSensor()
 
-            sensors_values[name] = value
+                sensors_values[name] = value
+            except:
+                rospy.logerr("sensor '{}' not implemented!".format(name))
+                sensors_values[name] = False 
 
     resp = GetSensorsResponse(json.dumps(sensors_values))
 
