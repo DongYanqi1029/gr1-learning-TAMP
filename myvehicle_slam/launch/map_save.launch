@@ -1,6 +1,6 @@
 <launch>
     <arg name="map_name" default="demo_world" />
-    <arg name="map_pack" default="myvehicle_slam" />
+    <arg name="map_pack" default="gazebo_worlds" />
     <arg name="filename" default="$(eval find(map_pack) + '/map/' + map_name)" />
 
     <!-- Save grid map -->

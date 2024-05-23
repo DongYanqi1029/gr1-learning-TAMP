@@ -1,8 +1,8 @@
 import os
 import networkx as _nx
 from gr1py.form import gr1c, util
-from tulip import spec, synth, dumpsmach
-import tulip.transys.export.machine2scxml as _scxml
+from tulip import spec, synth
+# import tulip.transys.export.machine2scxml as _scxml
 
 def _ast2expr(ast):
     if isinstance(ast, tuple):
@@ -20,7 +20,7 @@ def _ast2expr(ast):
             output = str(ast)
     return output
 
-def _get_expr(asd:dict, key:str) -> str:
+def _get_expr(asd:dict, key:str):
     if not key in asd or asd[key] == '':
         return ["TRUE"]
     else:
@@ -50,6 +50,9 @@ def load_GRSpec(filename:str) -> spec.GRSpec:
     sys_prog = _get_expr(asd, 'SYSGOAL')
 
     specs = spec.GRSpec(env_vars=env_vars, sys_vars=sys_vars, env_init=env_init, sys_init=sys_init, env_safety=env_safety, sys_safety=sys_safety, env_prog=env_prog, sys_prog=sys_prog)
+    specs.moore = False
+    specs.plus_one = False
+    specs.qinit = r'\A \E'
 
     return specs
 
@@ -70,8 +73,7 @@ def load_GRSpec(filename:str) -> spec.GRSpec:
 if __name__ == "__main__":
 
     specs = load_GRSpec("/home/dyq/catkin_ws/src/gr1strategy/specs/demo_gr1.spc")
-    specs.qinit = r'\E \A'
-
+    
     # Mealy
     ctrl = synth.synthesize(specs)
     print(ctrl)

@@ -50,7 +50,7 @@ def handle_set_actuators(req):
                         rospy.loginfo("Executing action {} ...".format(name))
                     else:
                         rospy.loginfo("Execution of action {} completed!".format(name))
-                except e:
+                except:
                     # do nothing
                     rospy.logerr("Actuator '{}' not implemented!".format(name))
             else:

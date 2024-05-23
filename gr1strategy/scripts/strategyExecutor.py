@@ -62,6 +62,7 @@ class StrategyExecutor():
         
         ######## Sensor Value ########
         input_props = self.getSensorValues()
+        print(input_props)
     
         ######## Transition ########
         # Find next states

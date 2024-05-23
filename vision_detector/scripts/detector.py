@@ -91,7 +91,7 @@ class YoloDetector():
         # Publish messages
         self.img_pub.publish(output_img_msg)
         self.dct_pub.publish(dect_array)
-        self.pose_pub.publishe(pose_array)
+        self.pose_pub.publish(pose_array)
 
     def estimate_pose(self, bbox, pc_sub:PointCloud2):
         bbox = np.array(bbox)

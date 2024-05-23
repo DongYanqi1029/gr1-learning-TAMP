@@ -5,6 +5,7 @@ from gr1strategy.srv import GetSensors, GetSensorsResponse
 import gr1strategy.sensors as sensors
 import json
 from collections import defaultdict
+import importlib
 
 def handle_get_sensors(req):
     props = req.sensors

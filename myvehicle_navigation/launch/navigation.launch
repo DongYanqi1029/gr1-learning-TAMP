@@ -1,8 +1,8 @@
 <launch>
 
     <!-- Map config file -->
-    <arg name="map" default="$(find myvehicle_slam)/map/demo_world.yaml" /> 
-    <arg name="semantic_map" default="$(find myvehicle_slam)/map/demo_world_semantic.yaml" /> 
+    <arg name="map" default="$(find gazebo_worlds)/map/demo_world.yaml" /> 
+    <arg name="semantic_map" default="$(find gazebo_worlds)/map/demo_world_semantic.yaml" /> 
     <arg name="model" default="$(env TURTLEBOT3_MODEL)" />
 
     <!-- Load map -->

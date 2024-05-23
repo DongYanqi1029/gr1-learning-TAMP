@@ -4,9 +4,13 @@ from vision_detector.msg import Detection, DetectionArray
 
 
 def detect()->list[Detection]:
-    dcts = rospy.wait_for_message('/yolo_detector/detections', DetectionArray, timeout=1)
+    objects = []
 
-    objects = set(map(lambda x:x.name, dcts.detections))
+    try:
+        dcts = rospy.wait_for_message('/yolo_detector/detections', DetectionArray, timeout=5)
+        objects = set(map(lambda x:x.name, dcts.detections))
+    except:
+        rospy.logerr("Waiting for Yolo detections timeout!")
 
     return objects
 
