@@ -12,8 +12,9 @@ from vision_detector.msg import Detection, DetectionArray
 from geometry_msgs.msg import Pose, PoseArray, Point
 import sensor_msgs.point_cloud2 as pc2
 import message_filters
+import struct
 
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
 class YoloDetector():
     def __init__(self):

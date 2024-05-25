@@ -101,7 +101,6 @@ def execute_main(spec_file=None):
     specs = None
     if spec_file is not None:
         specs = aux.load_GRSpec(spec_file)
-        specs.qinit = r'\E \A'
     else:
         rospy.logerr("Please specify a spec file for synthesis!")
     
