@@ -1,8 +1,9 @@
 <launch>
 
     <!-- Map config file -->
-    <arg name="map" default="$(find gazebo_worlds)/map/demo_world.yaml" /> 
-    <arg name="semantic_map" default="$(find gazebo_worlds)/map/demo_world_semantic.yaml" /> 
+    <arg name="name" default="demo_world"/>
+    <arg name="map" default="$(find gazebo_worlds)/map/$(arg name).yaml" /> 
+    <arg name="semantic_map" default="$(find gazebo_worlds)/map/$(arg name)_semantic.yaml" /> 
     <arg name="model" default="$(env TURTLEBOT3_MODEL)" />
 
     <!-- Load map -->
@@ -16,9 +17,6 @@
 
     <!-- Auto initial pose localization -->
     <!-- <node pkg="rosservice" type="rosservice" name="rosservice" args="call /request_nomotion_update"/> -->
-
-    <!-- Run rviz-->
-    <node pkg="rviz" type="rviz" name="rviz" args="-d $(find myvehicle_navigation)/rviz/nav.rviz"/>
 
     <!-- Run global planner -->
     <include file="$(find myvehicle_navigation)/launch/global_planner.launch"/>
@@ -37,6 +35,9 @@
 
     <!--Yolo detector-->
     <node name="yolo_detector" pkg="vision_detector" type="detector.py"/>
+
+    <!-- Run rviz-->
+    <node pkg="rviz" type="rviz" name="rviz" args="-d $(find myvehicle_navigation)/rviz/nav.rviz"/>
 
 
 

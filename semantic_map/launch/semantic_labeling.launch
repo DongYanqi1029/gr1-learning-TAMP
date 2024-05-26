@@ -1,0 +1,18 @@
+<launch>
+    <!-- Map config file -->
+    <arg name="map" default="$(find aws_robomaker_small_house_world)/maps/turtlebot3_waffle_pi/map.yaml" /> 
+    <arg name="model" default="$(env TURTLEBOT3_MODEL)" />
+
+    <!-- Load map -->
+    <node name="map_server" pkg="map_server" type="map_server" args="$(arg map)" />
+
+     <!-- Semantic map tagging -->
+    <node name="semantic_mapping" pkg="semantic_map" type="semantic_mapping.py"/>
+
+    <!-- Run AMCL for localization -->
+    <include file="$(find myvehicle_navigation)/launch/amcl.launch" />
+
+    <!-- Rivz -->
+    <node pkg="rviz" type="rviz" name="rviz" required="true" args="-d $(find semantic_map)/rviz/semantic.rviz"/>
+
+</launch>

@@ -1,0 +1,5 @@
+<launch>
+    <arg name="filename"/>
+
+    <node name="semantic_map_saver" pkg="semantic_map" type="semantic_saver.py" args="-f $(arg filename)" />
+</launch>

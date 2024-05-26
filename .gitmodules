@@ -1,3 +1,9 @@
 [submodule "rospy_message_converter"]
 	path = rospy_message_converter
 	url = https://github.com/DFKI-NI/rospy_message_converter
+[submodule "vision_detector/yolov5"]
+	path = vision_detector/yolov5
+	url = https://github.com/ultralytics/yolov5.git
+[submodule "aws-robomaker-small-house-world"]
+	path = aws-robomaker-small-house-world
+	url = https://github.com/aws-robotics/aws-robomaker-small-house-world.git

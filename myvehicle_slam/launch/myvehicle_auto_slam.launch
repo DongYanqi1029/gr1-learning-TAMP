@@ -28,6 +28,6 @@
     <node name="semantic_mapping" pkg="semantic_map" type="semantic_mapping.py"/>
 
     <!-- Rivz -->
-    <node pkg="rviz" type="rviz" name="rviz" required="true" args="-d $(find turtlebot3_slam)/rviz/turtlebot3_$(arg slam_methods).rviz"/>
+    <node pkg="rviz" type="rviz" name="rviz" required="true" args="-d $(find semantic_map)/rviz/semantic.rviz"/>
 
 </launch>

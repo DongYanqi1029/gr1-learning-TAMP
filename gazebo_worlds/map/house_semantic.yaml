@@ -1,0 +1,191 @@
+markers:
+- action: 0
+  color:
+    a: 0.5
+    b: 1.0
+    g: 0.0
+    r: 0.0
+  colors: []
+  frame_locked: false
+  header:
+    frame_id: map
+    seq: 0
+    stamp:
+      nsecs: 922000000
+      secs: 246
+  id: 1
+  lifetime:
+    nsecs: 0
+    secs: 0
+  mesh_resource: ''
+  mesh_use_embedded_materials: false
+  ns: Region1
+  points: []
+  pose:
+    orientation:
+      w: 1.0
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    position:
+      x: -6.002865791320801
+      y: -0.22233763337135315
+      z: 0.002471923828125
+  scale:
+    x: 0.0
+    y: 0.0
+    z: 0.3
+  text: Region1
+  type: 9
+- action: 0
+  color:
+    a: 0.5
+    b: 1.0
+    g: 0.0
+    r: 0.0
+  colors: []
+  frame_locked: false
+  header:
+    frame_id: map
+    seq: 1
+    stamp:
+      nsecs: 486000000
+      secs: 275
+  id: 2
+  lifetime:
+    nsecs: 0
+    secs: 0
+  mesh_resource: ''
+  mesh_use_embedded_materials: false
+  ns: Region2
+  points: []
+  pose:
+    orientation:
+      w: 1.0
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    position:
+      x: -6.007108688354492
+      y: -3.235783338546753
+      z: 0.002532958984375
+  scale:
+    x: 0.0
+    y: 0.0
+    z: 0.3
+  text: Region2
+  type: 9
+- action: 0
+  color:
+    a: 0.5
+    b: 1.0
+    g: 0.0
+    r: 0.0
+  colors: []
+  frame_locked: false
+  header:
+    frame_id: map
+    seq: 2
+    stamp:
+      nsecs: 189000000
+      secs: 284
+  id: 3
+  lifetime:
+    nsecs: 0
+    secs: 0
+  mesh_resource: ''
+  mesh_use_embedded_materials: false
+  ns: Region3
+  points: []
+  pose:
+    orientation:
+      w: 1.0
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    position:
+      x: 1.148386836051941
+      y: -0.33724626898765564
+      z: -0.001434326171875
+  scale:
+    x: 0.0
+    y: 0.0
+    z: 0.3
+  text: Region3
+  type: 9
+- action: 0
+  color:
+    a: 0.5
+    b: 1.0
+    g: 0.0
+    r: 0.0
+  colors: []
+  frame_locked: false
+  header:
+    frame_id: map
+    seq: 3
+    stamp:
+      nsecs: 443000000
+      secs: 287
+  id: 4
+  lifetime:
+    nsecs: 0
+    secs: 0
+  mesh_resource: ''
+  mesh_use_embedded_materials: false
+  ns: Region4
+  points: []
+  pose:
+    orientation:
+      w: 1.0
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    position:
+      x: 1.4008868932724
+      y: 4.201706886291504
+      z: 0.00250244140625
+  scale:
+    x: 0.0
+    y: 0.0
+    z: 0.3
+  text: Region4
+  type: 9
+- action: 0
+  color:
+    a: 0.5
+    b: 1.0
+    g: 0.0
+    r: 0.0
+  colors: []
+  frame_locked: false
+  header:
+    frame_id: map
+    seq: 4
+    stamp:
+      nsecs: 697000000
+      secs: 293
+  id: 5
+  lifetime:
+    nsecs: 0
+    secs: 0
+  mesh_resource: ''
+  mesh_use_embedded_materials: false
+  ns: Region5
+  points: []
+  pose:
+    orientation:
+      w: 1.0
+      x: 0.0
+      y: 0.0
+      z: 0.0
+    position:
+      x: 6.549530982971191
+      y: -1.9362331628799438
+      z: 0.006378173828125
+  scale:
+    x: 0.0
+    y: 0.0
+    z: 0.3
+  text: Region5
+  type: 9
