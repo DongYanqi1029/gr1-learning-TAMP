@@ -1,7 +1,7 @@
 <launch>
 
     <!-- Map config file -->
-    <arg name="world_name" default="demo_world"/>
+    <arg name="world_name"/>
     <arg name="map" default="$(find gazebo_worlds)/map/$(arg world_name).yaml" /> 
     <arg name="semantic_map" default="$(find gazebo_worlds)/map/$(arg world_name)_semantic.yaml" /> 
     <arg name="model" default="$(env TURTLEBOT3_MODEL)" />

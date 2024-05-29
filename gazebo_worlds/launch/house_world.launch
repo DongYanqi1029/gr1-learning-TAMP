@@ -7,18 +7,18 @@
   <arg name="z" default="0.01" />
   <arg name="roll" default="0.0"/>
   <arg name="pitch" default="0.0"/>
-  <arg name="yaw" default="-1.57"/>
+  <arg name="yaw" default="0.0"/>
   <arg name="gui" default="true" />
 
   <!--Spawn world-->
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
-    <arg name="world_name" value="$(find aws_robomaker_small_house_world)/worlds/small_house.world"/>
+    <arg name="world_name" value="$(find gazebo_worlds)/worlds/small_house_birdview.world"/>
     <arg name="paused" default="false"/>
     <arg name="use_sim_time" default="true"/>
     <arg name="gui" default="$(arg gui)"/>
     <arg name="headless" default="false"/>
     <arg name="debug" default="false"/>
-    <arg name="verbose" default="true"/>
+    <!-- <arg name="verbose" default="true"/> -->
   </include>
 
   <!--Spawn robot-->

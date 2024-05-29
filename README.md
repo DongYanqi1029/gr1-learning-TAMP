@@ -7,7 +7,7 @@ A GR(1) and learning based task and motion planning framework for autonomous mob
 3. ros-noetic-explore-lite
 
 # TODO
-1. Add a gazebo scene with person
-2. Optimize yolo performance in ROS
-3. Add object following actuator for gr1startegy
+1. Try object pose estimation with depth image (point cloud data not working very well).
+2. Add a gazebo scene with person.
+3. Add object following actuator for gr1startegy.
 
