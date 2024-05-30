@@ -190,7 +190,7 @@ class Observation():
         state = np.array(state)
 
         # rospy.logdebug("Scan Observations==>" + str(scan_ob))
-        rospy.loginfo("Goal Observations(distance, angle)==>" + str(goal_ob))
+        rospy.logdebug("Goal Observations(distance, angle)==>" + str(goal_ob))
         # rospy.logdebug("Last Action Observations==>" + str(last_action_ob))
 
         return state  

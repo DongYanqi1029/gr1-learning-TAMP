@@ -52,7 +52,7 @@ def handle_set_actuators(req):
                         rospy.loginfo("Execution of action {} completed!".format(name))
                 except:
                     # do nothing
-                    rospy.logerr("Actuator '{}' not implemented!".format(name))
+                    rospy.logwarn("Actuator '{}' not implemented!".format(name))
             else:
                 pass
 
@@ -61,7 +61,7 @@ def handle_set_actuators(req):
     return resp
 
 if __name__ == "__main__":
-    rospy.init_node("actuators_handler")
+    rospy.init_node("actuators_handler", log_level=rospy.INFO)
 
     srv = rospy.Service("set_actuators", SetActuators, handle_set_actuators)
     rospy.loginfo("Ready to handle set actuators.")

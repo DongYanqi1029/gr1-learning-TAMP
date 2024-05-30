@@ -1,6 +1,6 @@
 #! /usr/bin python
 
-import rospy
+import rospy, rospkg
 import cmath
 from nav_msgs.msg import Path
 from geometry_msgs.msg import Twist, PoseWithCovarianceStamped, Pose, PoseStamped
@@ -28,6 +28,7 @@ class drl_local_planner():
             self.global_plan = waypoints
             self.current_goal = 0
             rospy.loginfo("Global Plan updated!")
+            rospy.loginfo("Executing global path plan...")
 
             reach = Bool()
             reach.data = False
@@ -50,7 +51,7 @@ class drl_local_planner():
         else:
             return False
 
-    def local_plan(self):
+    def local_plan(self)->bool:
         # get vehicle pose from amcl
         pose = rospy.wait_for_message("/amcl_pose", PoseWithCovarianceStamped).pose.pose
         pose = list([pose.position.x, pose.position.y, pose.orientation])
@@ -63,13 +64,13 @@ class drl_local_planner():
             reach.data = True
             self.reach_pub.publish(reach)
             
-            return None
+            return True
 
-        # Check reach target 
+        # Check reach target and get current target point
         while self.reach_current_traget(pose):
             self.current_goal += 1
 
-        # Get current target point 
+        # Check if path plan is completed
         if self.current_goal >= len(self.global_plan):
             twist = Twist()
             twist.linear.x = 0
@@ -79,8 +80,7 @@ class drl_local_planner():
             reach = Bool()
             reach.data = True
             self.reach_pub.publish(reach)
-
-            rospy.logwarn("Current global plan completed, please set new goal!")
+            return True
         else:
             # get current traget point
             target = self.global_plan[self.current_goal]
@@ -93,7 +93,7 @@ class drl_local_planner():
             state = self.obs.get_state()
             action = self.policy.get_action(state) # linear_vel, angular_vel
 
-            rospy.logwarn("Current pose: " + str(self.obs.pose) + " Current traget: " + str(self.obs.target))
+            # rospy.loginfo("Current pose: " + str(self.obs.pose) + " Current traget: " + str(self.obs.target))
 
             # send control command to /cmd_vel
             twist = Twist()
@@ -106,8 +106,9 @@ class drl_local_planner():
                 reach = Bool()
                 reach.data = False
                 self.reach_pub.publish(reach)
+                return False
             except:
-                print('Error publishing Twist Command')
+                rospy.logerr('Error publishing Twist Command')
 
     def run(self):
         rospy.init_node("drl_local_planner")
@@ -115,17 +116,22 @@ class drl_local_planner():
         self.cmd_pub = rospy.Publisher("/cmd_vel", Twist, queue_size=20)
         self.reach_pub = rospy.Publisher("/nav/reach", Bool, queue_size=10)
 
-        r = rospy.Rate(30) # 5Hz
+        plan_completed = False
+
+        r = rospy.Rate(10) # 5Hz
         while not rospy.is_shutdown():
             # drl control
-            self.local_plan()
+            res = self.local_plan()
+            if res and plan_completed == False:
+                rospy.logwarn("Current global plan completed, please set new goal!")
+            plan_completed = res
             r.sleep()
 
         rospy.spin()
 
 
 if __name__ == "__main__":
-    model_path = "/home/dyq/catkin_ws/src/myvehicle_navigation/models"
+    model_path = rospkg.RosPack().get_path('myvehicle_navigation') + "/models"
     model_name = "lidar_td3_nav.pt"
 
     planner = drl_local_planner(model_name, model_path)

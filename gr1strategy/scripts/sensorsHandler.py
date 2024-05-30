@@ -36,7 +36,7 @@ def handle_get_sensors(req):
 
                 sensors_values[name] = value
             except:
-                rospy.logerr("sensor '{}' not implemented!".format(name))
+                rospy.logwarn("sensor '{}' not implemented!".format(name))
                 sensors_values[name] = False 
 
     resp = GetSensorsResponse(json.dumps(sensors_values))
@@ -44,7 +44,7 @@ def handle_get_sensors(req):
     return resp
 
 if __name__ == "__main__":
-    rospy.init_node("sensors_handler")
+    rospy.init_node("sensors_handler", log_level=rospy.INFO)
 
     srv = rospy.Service("get_sensors", GetSensors, handle_get_sensors)
     rospy.loginfo("Ready to handle get sensors values.")

@@ -1,4 +1,4 @@
 string name
 float64 confidence
-bool isNone
+bool isValid
 geometry_msgs/Pose pose

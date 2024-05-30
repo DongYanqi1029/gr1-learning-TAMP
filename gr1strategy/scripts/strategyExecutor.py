@@ -62,7 +62,7 @@ class StrategyExecutor():
         
         ######## Sensor Value ########
         input_props = self.getSensorValues()
-        print(input_props)
+        rospy.loginfo("Current Sensor inputs: {}".format(input_props))
     
         ######## Transition ########
         # Find next states
@@ -71,6 +71,7 @@ class StrategyExecutor():
         next_state, output_props = self.strategy.reaction(self.current_state, input_props)
 
         ######## Set Actuation and receive feedback ########
+        rospy.loginfo("Current Actuators outputs: {}".format(output_props))
         act_feedback = self.setActuators(output_props)
 
         ######## Update Strategy ########
@@ -89,7 +90,7 @@ class StrategyExecutor():
             self.runStrategyIteration()
             time.sleep(1)
 
-        rospy.logdebug("strategy executor quitting...")
+        rospy.loginfo("strategy executor quitting...")
 
 
 def execute_main(spec_file=None):
@@ -137,7 +138,7 @@ if __name__ == "__main__":
         elif opt in ("-s", "--spec-file"):
             spec_file = arg
 
-    rospy.init_node("strategy_executor")
+    rospy.init_node("strategy_executor", log_level=rospy.INFO)
     execute_main(spec_file)
     rospy.spin()
 
