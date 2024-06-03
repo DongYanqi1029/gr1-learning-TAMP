@@ -28,7 +28,7 @@ class YoloDetector():
 
         rospy.loginfo("Loading Yolov5 model...")
         # self.model = torch.hub.load('ultralytics/yolov5', 'yolov5s', device='cpu')
-        self.model_name = "yolov5n.pt"
+        self.model_name = "yolov5s.pt"
         self.model_path = rospkg.RosPack().get_path('vision_detector') + '/models/' + self.model_name
         self.yolo_path = rospkg.RosPack().get_path('vision_detector') + '/yolov5/'
         self.model = torch.hub.load(self.yolo_path, 'custom', path=self.model_path, device=device, force_reload=True, source='local')
@@ -87,6 +87,7 @@ class YoloDetector():
 
         objectpose_array = ObjectPoseArray()
         objectpose_array.header = pc_sub.header
+        objectpose_array.header.frame_id = "map"
         objectpose_array.objects = []
 
         for *xyxy, conf, Cls in output_bbox:
@@ -178,29 +179,37 @@ class YoloDetector():
         return pose_object_in_world
 
     def estimate_pose_depth(self, bbox, depth_image):
-        u = (bbox[0]+bbox[2])//2
-        v = (bbox[1]+bbox[3])//2
+        xmin, ymin, xmax, ymax = bbox
+
+        u = int((xmin + xmax)//2)
+        v = int((ymin + ymax)//2)
 
         # point_idx = v * image_shape[1] + u
 
-        # Get object pose from point cloud data
-        step = 10
-        sample_raidus = 2
-        points = []
-        for dx in range(-(sample_raidus * step), (sample_raidus * step)+1, step):
-            for dy in range(-(sample_raidus * step), (sample_raidus * step)+1, step):
-                if (u+dx) >= 0 and (u+dx) < depth_image.shape[1] and (v+dy) >= 0 and (v+dy) <= depth_image.shape[0]:
-                    if not np.isnan(depth_image[v+dy, u+dx]):
-                        points.append([u+dx, v+dy, depth_image[v+dy, u+dx]])
+        # Get object pose from depth_camera data
+
+        # step = 10
+        # sample_raidus = 2
+        # points = []
+        # for dx in range(-(sample_raidus * step), (sample_raidus * step)+1, step):
+        #     for dy in range(-(sample_raidus * step), (sample_raidus * step)+1, step):
+        #         if (u+dx) >= 0 and (u+dx) < depth_image.shape[1] and (v+dy) >= 0 and (v+dy) <= depth_image.shape[0]:
+        #             if not np.isnan(depth_image[v+dy, u+dx]):
+        #                 points.append([u+dx, v+dy, depth_image[v+dy, u+dx]])
+        sample_N = 30
+        obj_depth = depth_image[ymin:ymax+1, xmin:xmax+1]
+        flat_i = np.argpartition(obj_depth.ravel(), sample_N)[:sample_N]
+        i_list = np.unravel_index(flat_i, obj_depth.shape)
+        points = [obj_depth[y, x] for y, x in zip(i_list[0], i_list[1])]
 
         # No useful pixel in sampled points
         if len(points) == 0:
             return None
 
         point = np.mean(np.array(points), axis=0)
-        x = int(point[0])
-        y = int(point[1])
-        depth = point[2]
+        x = u
+        y = v
+        depth = point
 
         # Get camera inner parameters
         camera_info = rospy.wait_for_message("/camera/rgb/camera_info", CameraInfo, timeout=3)
@@ -242,12 +251,14 @@ class YoloDetector():
 
         pose_object = aux.pose_msg_to_pose(pose_object_in_camera)
         T_pose_object_in_camera = aux.pose_to_matrix(pose_object[0], pose_object[1])
+        # pose_object_in_camera = aux.matrix_to_pose(T_pose_object_in_camera)
 
         T_pose_object_in_world = np.dot(np.dot(T_pose_vehicle_in_world, T_pose_camera_in_vehicle), T_pose_object_in_camera)
         trans, rot = aux.matrix_to_pose(T_pose_object_in_world)
         pose_object_in_world = aux.pose_to_pose_msg(trans, rot)
 
         return pose_object_in_world
+        # return aux.pose_to_pose_msg(pose_object_in_camera[0], pose_object_in_camera[1])
 
     def run(self):
         rospy.spin()

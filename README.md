@@ -7,6 +7,7 @@ A GR(1) and learning based task and motion planning framework for autonomous mob
 3. ros-noetic-explore-lite
 
 # TODO
-1. Add a gazebo scene with person(static and dynamic).
-2. Add object following actuator for gr1startegy.
+1. Add a gazebo scene with person(dynamic).
+2. Add dynamic person following actuator(currently only static person following is available).
+3. Optimize performance of object detection and pose estimation.
 

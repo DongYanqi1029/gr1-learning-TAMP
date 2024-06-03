@@ -9,11 +9,11 @@ from abc import ABC, abstractmethod
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-MAX_LASER_VALUE = 1.5
+MAX_LASER_VALUE = 2
 MAX_GOAL_DISTANCE = 6
 MAX_LINEAR_VEL = 0.22
 MAX_ANGULAR_VEL = 2.0
-THRESHOLD_GOAL = 0.5
+THRESHOLD_GOAL = 0.8
 
 SCAN_SIZE = 40
 ACTION_SIZE = 2

@@ -8,7 +8,7 @@ def detect()->list[Detection]:
 
     try:
         dcts = rospy.wait_for_message('/yolo_detector/detections', DetectionArray, timeout=5)
-        objects = set(map(lambda x:x.name, dcts.detections))
+        objects = set(map(lambda x:x.name if x.confidence > 0.35 else "", dcts.detections))
     except:
         rospy.logerr("Waiting for Yolo detections timeout!")
 

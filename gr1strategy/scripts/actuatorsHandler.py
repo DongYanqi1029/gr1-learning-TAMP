@@ -34,12 +34,6 @@ def handle_set_actuators(req):
         
         # Other actuator module 
         else:
-            # Function call for ROS Service request of corresponding module
-            # setAction = getattr(actuators, name + ".setAction")
-            # feedback = setAction(value)
-            # if not feedback:
-            #     res = False
-            #     rospy.logerr("Actuator {} execution failed!".format(name))
             if value:
                 try:
                     actuator = importlib.import_module('.{}'.format(name), package='gr1strategy.actuators')
@@ -50,8 +44,9 @@ def handle_set_actuators(req):
                         rospy.loginfo("Executing action {} ...".format(name))
                     else:
                         rospy.loginfo("Execution of action {} completed!".format(name))
-                except:
+                except Exception as e:
                     # do nothing
+                    rospy.logerr(str(e))
                     rospy.logwarn("Actuator '{}' not implemented!".format(name))
             else:
                 pass

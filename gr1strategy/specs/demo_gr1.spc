@@ -1,6 +1,6 @@
 # Variables
 ENV: see_person;
-SYS: goto_Region1 goto_Region2 goto_Region3 follow;
+SYS: goto_Region1 goto_Region2 goto_Region3 reach_person;
 
 # Specifications
 ENVINIT: ;
@@ -9,12 +9,12 @@ ENVGOAL: ;
 
 SYSINIT: ;
 SYSTRANS: 
-[] ((goto_Region1 & !goto_Region2 & !goto_Region3 & !follow) | (!goto_Region1 & goto_Region2 & !goto_Region3 & !follow) | (!goto_Region1 & !goto_Region2 & goto_Region3 & !follow) | (!goto_Region1 & !goto_Region2 & !goto_Region3 & follow))
-& [] (see_person -> (follow))
-& [] (!see_person -> !follow)
+[] ((goto_Region1 & !goto_Region2 & !goto_Region3 & !reach_person) | (!goto_Region1 & goto_Region2 & !goto_Region3 & !reach_person) | (!goto_Region1 & !goto_Region2 & goto_Region3 & !reach_person) | (!goto_Region1 & !goto_Region2 & !goto_Region3 & reach_person))
+& [] (see_person -> (reach_person))
+& [] (!see_person -> !reach_person)
 ;
 SYSGOAL: 
-[]<>(goto_Region1 | follow)
-& []<> (goto_Region2 | follow)
-& []<> (goto_Region3 | follow)
+[]<>(goto_Region1 | reach_person)
+& []<> (goto_Region2 | reach_person)
+& []<> (goto_Region3 | reach_person)
 ;
